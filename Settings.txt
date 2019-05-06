@@ -1,0 +1,276 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "13a92d8c-d92f-4cbc-9ce5-9604f241aebb",
+    "isDefault": true,
+    "name": "Azure for Students",
+    "state": "Enabled",
+    "tenantId": "3e5b01b0-9fc9-4c0c-99ec-8a32a7c5f6be",
+    "user": {
+      "name": "yj7082126@naver.com",
+      "type": "user"
+    }
+  }
+]
+
+az ad app create --display-name "PallyBot" --password "Dxcg0_37hgp93ev73y" --available-to-other-tenants
+
+{
+  "acceptMappedClaims": null,
+  "addIns": [],
+  "allowGuestsSignIn": null,
+  "allowPassthroughUsers": null,
+  "appId": "dccd03ef-acaa-4f43-98c9-bdfe139a05e4",
+  "appLogoUrl": null,
+  "appPermissions": null,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "availableToOtherTenants": true,
+  "deletionTimestamp": null,
+  "displayName": "PallyBot",
+  "errorUrl": null,
+  "groupMembershipClaims": null,
+  "homepage": null,
+  "identifierUris": [],
+  "informationalUrls": {
+    "marketing": null,
+    "privacy": null,
+    "support": null,
+    "termsOfService": null
+  },
+  "isDeviceOnlyAuthSupported": null,
+  "keyCredentials": [],
+  "knownClientApplications": [],
+  "logo@odata.mediaEditLink": "directoryObjects/cfdf96b2-5b91-4353-a3e4-e968f1b5d4d6/Microsoft.DirectoryServices.Application/logo",
+  "logoUrl": null,
+  "logoutUrl": null,
+  "mainLogo@odata.mediaEditLink": "directoryObjects/cfdf96b2-5b91-4353-a3e4-e968f1b5d4d6/Microsoft.DirectoryServices.Application/mainLogo",
+  "oauth2AllowIdTokenImplicitFlow": true,
+  "oauth2AllowImplicitFlow": false,
+  "oauth2AllowUrlPathMatching": false,
+  "oauth2Permissions": [
+    {
+      "adminConsentDescription": "Allow the application to access PallyBot on behalf of the signed-in user.",
+      "adminConsentDisplayName": "Access PallyBot",
+      "id": "1faec412-6fe5-44d2-b619-9256677e56a7",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Allow the application to access PallyBot on your behalf.",
+      "userConsentDisplayName": "Access PallyBot",
+      "value": "user_impersonation"
+    }
+  ],
+  "oauth2RequirePostResponse": false,
+  "objectId": "cfdf96b2-5b91-4353-a3e4-e968f1b5d4d6",
+  "objectType": "Application",
+  "odata.metadata": "https://graph.windows.net/3e5b01b0-9fc9-4c0c-99ec-8a32a7c5f6be/$metadata#directoryObjects/@Element",
+  "odata.type": "Microsoft.DirectoryServices.Application",
+  "optionalClaims": null,
+  "orgRestrictions": [],
+  "parentalControlSettings": {
+    "countriesBlockedForMinors": [],
+    "legalAgeGroupRule": "Allow"
+  },
+  "passwordCredentials": [
+    {
+      "additionalProperties": null,
+      "customKeyIdentifier": null,
+      "endDate": "2020-05-05T18:13:14.213575+00:00",
+      "keyId": "af415392-0f96-479c-9606-a119f6b4a36a",
+      "startDate": "2019-05-05T18:13:14.213575+00:00",
+      "value": null
+    }
+  ],
+  "preAuthorizedApplications": null,
+  "publicClient": null,
+  "publisherDomain": "yj7082126naver.onmicrosoft.com",
+  "recordConsentConditions": null,
+  "replyUrls": [],
+  "requiredResourceAccess": [],
+  "samlMetadataUrl": null,
+  "signInAudience": "AzureADMultipleOrgs",
+  "tokenEncryptionKeyId": null,
+  "wwwHomepage": null
+}
+
+az group deployment create --name "PallyBot" --resource-group "Pally_1" --template-file "template-with-preexisting-rg.json" --parameters appId="dccd03ef-acaa-4f43-98c9-bdfe139a05e4" appSecret="Dxcg0_37hgp93ev73y" botId="PallyBot" newWebAppName="PallyWebBot" existingAppServicePlan="PallyServicePlan" appServicePlanLocation="East US"
+
+{
+  "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Resources/deployments/PallyBot",
+  "location": null,
+  "name": "PallyBot",
+  "properties": {
+    "correlationId": "d2ed2ed4-2466-4b34-9d53-c46d7ffe6ec3",
+    "debugSetting": null,
+    "dependencies": [
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Web/serverfarms/PallyServicePlan",
+            "resourceGroup": "Pally_1",
+            "resourceName": "PallyServicePlan",
+            "resourceType": "Microsoft.Web/serverfarms"
+          }
+        ],
+        "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Web/sites/PallyWebBot",
+        "resourceGroup": "Pally_1",
+        "resourceName": "PallyWebBot",
+        "resourceType": "Microsoft.Web/sites"
+      },
+      {
+        "dependsOn": [
+          {
+            "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Web/sites/PallyWebBot",
+            "resourceGroup": "Pally_1",
+            "resourceName": "PallyWebBot",
+            "resourceType": "Microsoft.Web/sites"
+          }
+        ],
+        "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.BotService/botServices/PallyBot",
+        "resourceGroup": "Pally_1",
+        "resourceName": "PallyBot",
+        "resourceType": "Microsoft.BotService/botServices"
+      }
+    ],
+    "duration": "PT28.8493234S",
+    "mode": "Incremental",
+    "onErrorDeployment": null,
+    "outputResources": [
+      {
+        "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.BotService/botServices/PallyBot",
+        "resourceGroup": "Pally_1"
+      },
+      {
+        "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Web/serverfarms/PallyServicePlan",
+        "resourceGroup": "Pally_1"
+      },
+      {
+        "id": "/subscriptions/13a92d8c-d92f-4cbc-9ce5-9604f241aebb/resourceGroups/Pally_1/providers/Microsoft.Web/sites/PallyWebBot",
+        "resourceGroup": "Pally_1"
+      }
+    ],
+    "outputs": null,
+    "parameters": {
+      "appId": {
+        "type": "String",
+        "value": "dccd03ef-acaa-4f43-98c9-bdfe139a05e4"
+      },
+      "appSecret": {
+        "type": "String",
+        "value": "Dxcg0_37hgp93ev73y"
+      },
+      "appServicePlanLocation": {
+        "type": "String",
+        "value": "East US"
+      },
+      "botId": {
+        "type": "String",
+        "value": "PallyBot"
+      },
+      "botSku": {
+        "type": "String",
+        "value": "F0"
+      },
+      "existingAppServicePlan": {
+        "type": "String",
+        "value": "PallyServicePlan"
+      },
+      "newAppServicePlanName": {
+        "type": "String",
+        "value": ""
+      },
+      "newAppServicePlanSku": {
+        "type": "Object",
+        "value": {
+          "capacity": 1,
+          "family": "S",
+          "name": "S1",
+          "size": "S1",
+          "tier": "Standard"
+        }
+      },
+      "newWebAppName": {
+        "type": "String",
+        "value": "PallyWebBot"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Web",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "eastus"
+            ],
+            "properties": null,
+            "resourceType": "sites"
+          }
+        ]
+      },
+      {
+        "id": null,
+        "namespace": "Microsoft.BotService",
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiVersions": null,
+            "locations": [
+              "global"
+            ],
+            "properties": null,
+            "resourceType": "botServices"
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "template": null,
+    "templateHash": "8230470999779039838",
+    "templateLink": null,
+    "timestamp": "2019-05-05T18:18:04.636581+00:00"
+  },
+  "resourceGroup": "Pally_1",
+  "type": null
+}
+
+az bot prepare-deploy --lang Csharp --code-dir "." --proj-file-path "PallyBot.csproj"
+
+az webapp deployment source config-zip --resource-group "Pally_1" --name "PallyWebBot" --src "PallyBot.zip"
+
+{
+  "active": true,
+  "author": "N/A",
+  "author_email": "N/A",
+  "complete": true,
+  "deployer": "Push-Deployer",
+  "end_time": "2019-05-05T18:23:33.1379245Z",
+  "id": "ab6568a2ab7647e393bd795f55b85bc0",
+  "is_readonly": true,
+  "is_temp": false,
+  "last_success_end_time": "2019-05-05T18:23:33.1379245Z",
+  "log_url": "https://pallywebbot.scm.azurewebsites.net/api/deployments/latest/log",
+  "message": "Created via a push deployment",
+  "progress": "",
+  "provisioningState": null,
+  "received_time": "2019-05-05T18:22:49.5986687Z",
+  "site_name": "PallyWebBot",
+  "start_time": "2019-05-05T18:22:49.6924061Z",
+  "status": 4,
+  "status_text": "",
+  "url": "https://pallywebbot.scm.azurewebsites.net/api/deployments/latest"
+}
+
+
+PallyBot:
+
+POST /knowledgebases/dcb7e91d-4b3f-40ed-9eb8-55fd0f82c6a5/generateAnswer
+Host: https://pallyqna.azurewebsites.net/qnamaker
+Authorization: EndpointKey 273304f6-9a3c-456d-9f6e-a4b3e2bdde90
+Content-Type: application/json
+{"question":"<Your question>"}
